@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reto 30 Días | Mis Relatos</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;900&display=swap" rel="stylesheet">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <style>
+
+    </style>
+</head>
+<body>
+
+    <nav>
+        <a href="#" class="logo">RETO <span>LITERARIO</span></a>
+        <div class="menu-btn" id="menuBtn"><span></span><span></span><span></span></div>
+        <div class="nav-links" id="navLinks">
+            <a href="#main-grid" class="nav-item">Día Actual</a>
+            <a href="#sobre-mi" class="nav-item">Sobre el Autor</a>
+            <a href="#newsletter" class="nav-item">Newsletter</a>
+        </div>
+    </nav>
+
+    <header class="hero" id="hero">
+        <h1 data-aos="fade-down">30 DÍAS<br><span style="color:var(--accent)">30 RELATOS</span></h1>
+        <p data-aos="fade-up">UN DIA, UNA HISTORIA</p>
+    </header>
+
+    <main class="grid-container">
+        <div class="relatos-grid" id="main-grid"></div>
+    </main>
+
+    <section class="about-me" id="sobre-mi">
+        <div class="about-card" data-aos="fade-up">
+            <div class="about-img">🧑🏻‍💻</div>
+            <div class="about-text">
+                <h2>Sobre mí</h2>
+                <p>
+                    Soy un joven programador web al que le encanta aprender cosas nuevas, y con el afán de mejorar habilidades humanistas adormecidas como la escritura es por lo que he creado este proyecto. 
+                    <br><br>
+                    La idea es mezclar mis pensamientos y junto a información relevante actual, hacer <strong>retratos burlescos</strong> que entretengan e informen. Cada día crearé una historia nueva y la subiré aquí para que puedas distraerte por unos minutos.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <div class="modal" id="pdfModal">
+        <div class="modal-content">
+            <span class="close-modal" id="closeModal">CERRAR &times; Esc</span>
+            <iframe src="" id="pdfViewer"></iframe>
+        </div>
+    </div>
+
+    <section class="newsletter" id="newsletter">
+        <div data-aos="zoom-in">
+            <span style="background: rgba(255,152,0,0.2); color: var(--accent); padding: 5px 15px; border-radius: 20px; font-size: 0.8rem; font-weight: 700; letter-spacing: 1px;">SÉ EL PRIMERO EN LEER</span>
+            <h2 style="margin-top: 15px; font-size: 2.2rem;">¿Te vas a perder el próximo relato?</h2>
+            <p style="margin: 20px 0; color: rgba(255,255,255,0.8); max-width: 600px; margin-left: auto; margin-right: auto;">
+                Únete a otros lectores y recibe cada mañana el relato del día directamente en tu bandeja de entrada, junto a una breve píldora de literatura y humanismo.
+            </p>
+            
+            <form id="lead-form" 
+                action="https://assets.mailerlite.com/jsonp/1278866/forms/174393830340036284/subscribe" 
+                method="POST" 
+                style="display: flex; justify-content: center; gap: 10px; flex-wrap: wrap; max-width: 500px; margin: 0 auto;">
+                
+                <input type="email" 
+                    name="fields[email]" 
+                    placeholder="Tu email principal..." 
+                    required 
+                    style="flex: 1; min-width: 250px; padding: 18px 25px; border-radius: 12px; border: 2px solid transparent; background: rgba(255,255,255,0.1); color: white; transition: 0.3s; outline: none;"
+                    onfocus="this.style.borderColor='var(--accent)'" 
+                    onblur="this.style.borderColor='transparent'">
+                
+                <button type="submit" id="submit-btn"
+                    style="padding: 18px 35px; border-radius: 12px; border: none; background: var(--accent); color: #0f021a; font-weight: 900; cursor: pointer; transition: 0.3s; text-transform: uppercase; letter-spacing: 1px;">
+                    SUSCRIBIRME
+                </button>
+            </form>
+            
+            <p id="form-message" style="margin-top: 15px; font-size: 0.8rem; color: var(--accent); display: none;">¡Perfecto! Revisa tu bandeja de entrada pronto. 🚀</p>
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2026 - Reto de Escritura. Creación propia. Todos los derechos reservados.</p>
+    </footer>
+
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        AOS.init({ once: true });
+
+        // Navegación
+        const menuBtn = document.getElementById('menuBtn');
+        const navLinks = document.getElementById('navLinks');
+        
+        menuBtn.addEventListener('click', () => {
+            menuBtn.classList.toggle('open');
+            navLinks.classList.toggle('active');
+            document.body.style.overflow = navLinks.classList.contains('active') ? 'hidden' : 'auto';
+        });
+
+        // Configuración de Relatos
+        const misRelatos = {
+            1: { titulo: "Pablo y el minotauro", pdf: "pdfs/dia1.pdf" },
+            2: { titulo: "Entre Dioses y agua", pdf: "pdfs/dia2.pdf" },
+            3: { titulo: "Lógica griega", pdf: "pdfs/dia3.pdf" },
+            4: { titulo: "30I-Atlántidas", pdf: "pdfs/dia4.pdf" },
+            5: { titulo: "Carta al pasado", pdf: "pdfs/dia5.pdf"},
+            6: { titulo: "Éxodo 'Ciudal'", pdf: "pdfs/dia6.pdf"}
+        };
+
+        const grid = document.getElementById('main-grid');
+        const modal = document.getElementById('pdfModal');
+        const iframe = document.getElementById('pdfViewer');
+        const closeBtn = document.getElementById('closeModal');
+
+        for (let i = 1; i <= 30; i++) {
+            const info = misRelatos[i];
+            const estaDisponible = !!info;
+            const card = document.createElement('div');
+            card.className = `card ${estaDisponible ? '' : 'locked'}`;
+            card.setAttribute('data-aos', 'fade-up');
+            card.innerHTML = `<div class="day-num">${i}</div><h3>${estaDisponible ? info.titulo : 'Próximamente...'}</h3>`;
+            if (estaDisponible) card.onclick = () => abrirRelato(info.pdf);
+            grid.appendChild(card);
+        }
+
+        // --- LÓGICA DEL MODAL ---
+        function abrirRelato(url) {
+            iframe.src = url;
+            modal.style.display = 'flex';
+            document.body.style.overflow = 'hidden';
+        }
+
+        function cerrarModal() {
+            modal.style.display = 'none';
+            iframe.src = "";
+            document.body.style.overflow = 'auto';
+        }
+
+        closeBtn.onclick = cerrarModal;
+
+        // Cerrar al hacer clic en el fondo oscuro
+        modal.addEventListener('click', (e) => {
+            if (e.target === modal) cerrarModal();
+        });
+
+        // Cerrar con tecla Escape
+        document.addEventListener('keydown', (e) => {
+            if (e.key === "Escape") cerrarModal();
+        });
+
+        
+    </script>
+
+    <script>
+    // Lógica para enviar sin recargar la página (AJAX)
+    const form = document.getElementById('lead-form');
+    const msg = document.getElementById('form-message');
+    const btn = document.getElementById('submit-btn');
+
+    form.onsubmit = (e) => {
+        e.preventDefault();
+        btn.innerText = 'ENVIANDO...';
+        btn.style.opacity = '0.7';
+
+        const data = new FormData(form);
+
+        fetch(form.action, {
+            method: 'POST',
+            body: data,
+            mode: 'no-cors' 
+        }).then(() => {
+            
+            window.location.href = 'gracias.html';
+        }).catch(() => {
+            
+            window.location.href = 'gracias.html';
+        });
+    }
+</script>
+</body>
+</html>

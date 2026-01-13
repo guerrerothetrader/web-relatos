@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>¡Gracias por unirte! | Reto Literario</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #6a1b9a;
+            --accent: #ff9800;
+            --dark: #0f021a;
+        }
+        body {
+            background: radial-gradient(circle at center, #2e0d4a 0%, #0f021a 100%);
+            color: white;
+            font-family: 'Montserrat', sans-serif;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            margin: 0;
+        }
+        .container {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 50px;
+            border-radius: 24px;
+            backdrop-filter: blur(15px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            max-width: 500px;
+            margin: 20px;
+        }
+        h1 { color: var(--accent); font-weight: 900; font-size: 2.5rem; margin-bottom: 15px; }
+        p { line-height: 1.6; color: rgba(255,255,255,0.8); margin-bottom: 30px; }
+        .step {
+            background: rgba(106, 27, 154, 0.3);
+            padding: 15px;
+            border-radius: 12px;
+            margin-bottom: 20px;
+            font-size: 0.9rem;
+            border-left: 4px solid var(--accent);
+            text-align: left;
+        }
+        .btn {
+            display: inline-block;
+            padding: 15px 30px;
+            background: var(--accent);
+            color: #0f021a;
+            text-decoration: none;
+            font-weight: 900;
+            border-radius: 12px;
+            transition: 0.3s;
+        }
+        .btn:hover { transform: translateY(-3px); box-shadow: 0 10px 20px rgba(255, 152, 0, 0.3); }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>¡CASI LISTO! 🚀</h1>
+        <p>He enviado un enlace de confirmación a tu bandeja de entrada. Es un paso necesario para empezar a recibir los relatos.</p>
+        
+        <div class="step">
+            <strong>⚠️ IMPORTANTE:</strong> Si no lo ves en un minuto, revisa tu carpeta de <strong>"Promociones"</strong> o <strong>"Spam"</strong> y márcalo como "No es spam".
+        </div>
+
+        <a href="index.html" class="btn">VOLVER AL RETO</a>
+    </div>
+</body>
+</html>
